@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zhangmrit.github.io/"/>
-  <updated>2019-09-11T06:27:00.873Z</updated>
+  <updated>2020-03-11T05:49:29.115Z</updated>
   <id>http://zhangmrit.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>mybatis 单参数不加@Param 报没有getter</title>
+    <link href="http://zhangmrit.github.io/2020/03/11/MybatisSingleParamNoGetter/"/>
+    <id>http://zhangmrit.github.io/2020/03/11/MybatisSingleParamNoGetter/</id>
+    <published>2020-03-11T05:47:16.000Z</published>
+    <updated>2020-03-11T05:49:29.115Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;code&gt;There is no getter for property named &#39;*&#39; in &#39;class java.lang.String&#39;&lt;/code&gt;，此错误之所以出现，是因为mybatis在对&lt;code&gt;parameterType=&amp;quot;String&amp;quot;&lt;/code&gt;的sql语句做了限制，假如你使用&lt;code&gt;&amp;lt;if test=&amp;quot;username != null&amp;quot;&amp;gt;&lt;/code&gt;或&lt;code&gt;&amp;lt;when test=&amp;quot;username != null&amp;quot;&amp;gt;&lt;/code&gt;这样的条件判断时，就会出现该错误，不过今天我们来刨根问底一下。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="mybatis" scheme="http://zhangmrit.github.io/categories/mybatis/"/>
+    
+    
+      <category term="mybatis" scheme="http://zhangmrit.github.io/tags/mybatis/"/>
+    
+      <category term="mapper" scheme="http://zhangmrit.github.io/tags/mapper/"/>
+    
+  </entry>
   
   <entry>
     <title>springboot部署https</title>
