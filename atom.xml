@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zhangmrit.github.io/"/>
-  <updated>2020-03-11T05:49:29.115Z</updated>
+  <updated>2020-05-11T08:36:17.017Z</updated>
   <id>http://zhangmrit.github.io/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Velocity模板语言(VTL) 入门指南</title>
+    <link href="http://zhangmrit.github.io/2020/05/11/VelocityDoc/"/>
+    <id>http://zhangmrit.github.io/2020/05/11/VelocityDoc/</id>
+    <published>2020-05-11T08:20:01.000Z</published>
+    <updated>2020-05-11T08:36:17.017Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;velocity模板好像没有什么比较好的文档，搜到一个，但是排版有点乱，所以美化和部分翻译以后分享给大家&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="工具" scheme="http://zhangmrit.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="velocity" scheme="http://zhangmrit.github.io/tags/velocity/"/>
+    
+  </entry>
   
   <entry>
     <title>mybatis 单参数不加@Param 报没有getter</title>

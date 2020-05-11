@@ -1,0 +1,1823 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/avatar.jpg?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/avatar.jpg?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="velocity模板好像没有什么比较好的文档，搜到一个，但是排版有点乱，所以美化和部分翻译以后分享给大家">
+<meta name="keywords" content="velocity">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Velocity模板语言(VTL) 入门指南">
+<meta property="og:url" content="http://zhangmrit.github.io/2020/05/11/VelocityDoc/index.html">
+<meta property="og:site_name" content="Alive">
+<meta property="og:description" content="velocity模板好像没有什么比较好的文档，搜到一个，但是排版有点乱，所以美化和部分翻译以后分享给大家">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-05-11T08:36:17.017Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Velocity模板语言(VTL) 入门指南">
+<meta name="twitter:description" content="velocity模板好像没有什么比较好的文档，搜到一个，但是排版有点乱，所以美化和部分翻译以后分享给大家">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Alive" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://zhangmrit.github.io/2020/05/11/VelocityDoc/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Velocity模板语言(VTL) 入门指南 | Alive</title>
+  
+
+
+
+
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?179d2d89d8cd472d4299811e5cdf9867";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Alive</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">那些微而足道的一点事</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/404.html" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>公益 404</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhangmrit.github.io/2020/05/11/VelocityDoc/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wind">
+      <meta itemprop="description" content="光怪陆离,生人勿进">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Alive">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Velocity模板语言(VTL) 入门指南
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-05-11 16:20:01 / 修改时间：16:36:17" itemprop="dateCreated datePublished" datetime="2020-05-11T16:20:01+08:00">2020-05-11</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/工具/" itemprop="url" rel="index"><span itemprop="name">工具</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2020/05/11/VelocityDoc/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/05/11/VelocityDoc/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+            <span id="/2020/05/11/VelocityDoc/" class="leancloud_visitors" data-flag-title="Velocity模板语言(VTL) 入门指南">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>velocity模板好像没有什么比较好的文档，搜到一个，但是排版有点乱，所以美化和部分翻译以后分享给大家</p>
+<a id="more"></a>
+<p>原文地址 <a href="https://blog.csdn.net/weixin_34056162/article/details/90686571" target="_blank" rel="noopener">https://blog.csdn.net/weixin_34056162/article/details/90686571</a></p>
+<p>Velocity模板语言 (VTL)提供了容易，简单，和清洁方式合并动态内容在你的网页上。即使一个网页开发者有少量或者没有编程经验也能很快有能力使用VTL嵌入动态内容到你的Web页面。</p>
+<p>VTL使用引用嵌入动态内容到Web页面, 一个引用也是一个引用类型. 变量是一种引用类型能够引用Java中定义变量,或者能够获取它的值在你的Web页面中通过VTL语句。这里有一个例子 VTL语句能够被嵌入到你的HTML文档中:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#set( $a = &quot;Velocity&quot; )</span><br></pre></td></tr></table></figure>
+<p>这个VTL 语句, 像所有的VTL语句一样，通过 <em>#</em> 字符开始并包含一个指令: <em>set</em>. 当一个用户访问你的页面时,Velocity模板 将在你的Web页面中搜索所有的*#*字符, 然后认为它是VTL语句的开始，但是#字符并没有实际意义。</p>
+<p>字符 *#*后面紧跟着, <em>set</em>.<em>set</em> 指向一个表达式 (放在括号里面) — 一个等式为变量分配一个值。变量的定义在左边赋值在右边; 它们之间通过 <em>=</em> 分开。</p>
+<p>在上面的实例中, 变量是 <em>$a</em> ,它的值是*Velocity。*这个变量像其它的引用一样, 通过 <em>$</em> 字符开始。字符串的值放在引号中,单引号或双引号都可以。单引号保证引号里面的值分配给变量。双引号准许你使用velocity的引用和指令,例如  “Hello $name”,  <em>$name</em> 将被定义的变量值=右边的内容所替换</p>
+<p>下面的规则能使你更好的了解Velocity的工作原理：引用是通过*$* 开始的，用来获取值。指令*#* 用来定义值。</p>
+<p>在上面实例中, <em>#set</em> 被用来给变量分配一个值。这个变量是 <em>$a</em>, 能够在模板中使用并输出 “Velocity”。</p>
+<p>原文地址 <a href="https://blog.csdn.net/weixin_34056162/article/details/90686571" target="_blank" rel="noopener">https://blog.csdn.net/weixin_34056162/article/details/90686571</a></p>
+<h2 id="hello-velocity-world实例"><a class="header-anchor" href="#hello-velocity-world实例">¶</a>Hello Velocity World实例</h2>
+<p>当一个值分配给一个变量时, 你能够引用这个变量在你的HTML 文档中.在下面的实例中, 先对 <em>$foo</em> 进行赋值，然后引用它.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">#set( $foo = &quot;Velocity&quot; )</span><br><span class="line">Hello $foo World!</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;html&gt;</span><br></pre></td></tr></table></figure>
+<p>这个网页的结果是答应出 “Hello Velocity World!”.</p>
+<p>为了是包含VTL语句指定可读性更强, 我们鼓励你开始每个VTL语句在新的一行, 但并不强制要求你这么做.<em>set</em> 指令将在后面章节详细介绍.</p>
+<h2 id="注释"><a class="header-anchor" href="#注释">¶</a>注释</h2>
+<p>注释以一种不被Velocity模板修改的原样输出描述文本。注释是一种很有用的方式，提醒你并且告诉其他人VTL语句的作用, 或者存放对你有用的其他信息。下面就是VTL注释的实例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">## 这是一个单行注释.</span><br></pre></td></tr></table></figure>
+<p><em>##</em> 表示的是单行注释表示本行都被注释。假如你需要多行注释, 不需要一行一行的注释。你可以使用多行注释, 多行注释以 <code>#*</code> 开始，以 <code>*#</code>做为结束, 可以用它来处理多行注释的情况.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">这是多行注释，浏览者能看到它。</span><br><span class="line"></span><br><span class="line">#*</span><br><span class="line"> Thus begins a multi-line comment. Online visitors won&apos;t</span><br><span class="line"> see this text because the Velocity Templating Engine will</span><br><span class="line"> ignore it.</span><br><span class="line"></span><br><span class="line">*#</span><br><span class="line"></span><br><span class="line">这里多行注释; 它是可见的.</span><br></pre></td></tr></table></figure>
+<p>这里有很多实例阐明多行注释和单行注释:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">This text is visible. ## This text is not.</span><br><span class="line">This text is visible.</span><br><span class="line">This text is visible. #* This text, as part of a multi-line</span><br><span class="line">comment, is not visible. This text is not visible; it is also</span><br><span class="line">part of the multi-line comment. This text still not</span><br><span class="line">visible. *# This text is outside the comment, so it is visible.</span><br><span class="line">## This text is not visible.</span><br></pre></td></tr></table></figure>
+<p>这是第三种的注释,  VTL注释块, 它被用来储存一些你需要关注的信息模板 (例如. javadoc作者版本信息):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#**</span><br><span class="line">This is a VTL comment block and</span><br><span class="line">may be used to store such information</span><br><span class="line">as the document author and versioning</span><br><span class="line">information:</span><br><span class="line">@author</span><br><span class="line">@version 5</span><br><span class="line">*#</span><br></pre></td></tr></table></figure>
+<h2 id="引用"><a class="header-anchor" href="#引用">¶</a>引用</h2>
+<p>在VTL中有三种类型的引用: 变量，属性和方法。作为一个使用VTL的设计者, 你和工程师必须一起在你的模板中，指定名字以及它所代表的引用。</p>
+<p><strong>变量</strong><br>
+VTL中变量标识符前面需要添加 “$” 来进行标记. AVTL标识符必须以字母 (a … z or A … Z)开始. 其他的字符可以使用下面几种:</p>
+<ul>
+<li>alphabetic (a … z, A … Z)</li>
+<li>numeric (0 … 9)</li>
+<li>hyphen (“-“)</li>
+<li>underscore (“_”)</li>
+</ul>
+<p>下面有一些可用的变量引用实例在VTL中:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$foo</span><br><span class="line">$mudSlinger</span><br><span class="line">$mud-slinger</span><br><span class="line">$mud_slinger</span><br><span class="line">$mudSlinger1</span><br></pre></td></tr></table></figure>
+<p>当VTL应用一个变量时, 例如*$foo，<em>这个变量可以获取一个值从模板的 <em>set</em>指令中, 或者从Java代码中。例如,假如在Java中定义了一个变量</em>$foo*,java中定义的值Web页面中所有的 <em>$foo</em>引用. 或者, 我在页面中定义下面语句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#set( $foo = &quot;bar&quot; )</span><br></pre></td></tr></table></figure>
+<p>$foo输出的结果将和你定义的是一样的。</p>
+<p><strong>属性</strong><br>
+VTL中第二个特点鲜明的引用是属性引用, 属性有一个与众不同的格式. 它的标识符前面需要添加一个*$*变量标识符, 紧跟着后面一个点(“.”) . 下面是一个在VTL中属性引用的实例:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$customer.Address</span><br><span class="line">$purchase.Total</span><br></pre></td></tr></table></figure>
+<p>就拿第一个实例来说, <em>$customer.Address</em>.它有两个意思. 它意味着,查询被<em>customer</em> 标识的哈希表返回和它相关联的<em>Address</em> 的值。同时*$customer.Address<em>也能被一个方法引用 (方法的引用在下一章在讨论); <em>$customer.Address</em>是</em>$customer.getAddress()*的一种缩写形式。如果你的网页有需求, Velocity 将可以使这两种形式变的有意义, 然后返回正确的值。</p>
+<p><strong>方法</strong><br>
+Java中定义的方法能够定义很多有用的事情, 像进行计算或者达到某种目的. 方法的引用是通过 “$” 标识符, 后面紧跟着方法体. VTL方法体紧跟着左括号符  (“(“), 紧跟着参数列表, 紧跟着右括号符(“)”). 下面是VTL中方法引用的实例:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$customer.getAddress()</span><br><span class="line">$purchase.getTotal()</span><br><span class="line">$page.setTitle( &quot;My Home Page&quot; )</span><br><span class="line">$person.setAttributes( [&quot;Strange&quot;, &quot;Weird&quot;, &quot;Excited&quot;] )</span><br></pre></td></tr></table></figure>
+<p>前两个例 — <em>$customer.getAddress()</em> 和 <em>$purchase.getTotal()</em> — 可以看着是属性的引用, <em>$customer.Address</em> 和*$purchase.*总之.这些引用在VTL中是很常见的!</p>
+<p>VTL 属性引用能够被当着方法引用的简写. 属性 <em>$customer.Address</em> 引用和 *$customer.getAddress()*方法的引用效果是一样的. 一般情况下如果可以,我们通过简写的方式来引用方法.属性和方法主要不同是方法能够引用参数 .</p>
+<p>下面的方法能够被简写</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$sun.getPlanets()</span><br><span class="line">$annelid.getDirt()</span><br><span class="line">$album.getPhoto()</span><br></pre></td></tr></table></figure>
+<p>我们可能期望方法返回属于太阳的行星的名字, 喂蚯蚓, 或者活动一张图片或者专辑. 下面方法有很长的标记.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$sun.getPlanet( [&quot;Earth&quot;, &quot;Mars&quot;, &quot;Neptune&quot;] )</span><br><span class="line">## Can&apos;t pass a parameter list with $sun.Planets</span><br><span class="line">$sisyphus.pushRock()</span><br><span class="line">## Velocity assumes I mean $sisyphus.getRock()</span><br><span class="line">$book.setTitle( &quot;Homage to Catalonia&quot; )</span><br><span class="line">## Can&apos;t pass a parameter</span><br></pre></td></tr></table></figure>
+<p>自从Velocity 1.6, 所有的数组引用被看这固定长度列表. 这意味着你能够调用java.util.Lis方法在数组引用。所以， 假如你有一个引用在数组上 ( 假定这里有一个字符数组后三个字)，你能够这样做:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$myarray.isEmpty()</span><br><span class="line">$myarray.size()</span><br><span class="line">$myarray.get(2)</span><br><span class="line">$myarray.set(1, &apos;test&apos;)</span><br></pre></td></tr></table></figure>
+<p>在Velocity 1.6支持可变参数方法. 一个方法 public void setPlanets(String… planets) 或者甚至是 public void setPlanets(String[] planets) (假如你使用Java 5 JDK), 现在可以接受任何数量的参数时调用的模板.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sun.setPlanets(&apos;Earth&apos;, &apos;Mars&apos;, &apos;Neptune&apos;)</span><br><span class="line">$sun.setPlanets(&apos;Mercury&apos;)</span><br><span class="line">$sun.setPlanets()</span><br><span class="line">## Will just pass in an empty, zero-length array</span><br></pre></td></tr></table></figure>
+<p><strong>属性调用规则</strong><br>
+正如前面提到的, 属性经常涉及到父类方法的引用. Velocity是十分擅长解决方法对应的属性获取，它可以根据几种不同的命名约定进行选择，准确的查找规则依赖是否属性的名字以大写开始。对于小写名字,例如 <em>$customer.address</em>, 调用的顺序是</p>
+<ol>
+<li>getaddress()</li>
+<li>getAddress()</li>
+<li>get(“address”)</li>
+<li>isAddress()</li>
+</ol>
+<p>对于大写的属性名字像 <em>$customer.Address</em>, 它稍微不同:</p>
+<ol>
+<li>getAddress()</li>
+<li>getaddress()</li>
+<li>get(“Address”)</li>
+<li>isAddress()</li>
+</ol>
+<p><strong>渲染</strong><br>
+每一个引用的值(变量，属性，或者方法)都被转换为一个字符串并作为最终的输出。假如这里有一个对象表示为*$foo* (例如一个整数对象), 当Velocity调用它时，Velocity会调用它的.toString() 方法转化为字符串.</p>
+<p><strong>索引标识符</strong><br>
+使用$foo[0] 的符号形式能够访问被定义的索引对象。这个形式和通过get调用一个对象是相同的例如$foo.get(0), 提供了一种简单的语法操作。下面是这种操作的实例:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$foo[0]       ## $foo takes in an Integer look up</span><br><span class="line">$foo[$i]      ## Using another reference as the index</span><br><span class="line">$foo[&quot;bar&quot;]   ## Passing a string where $foo may be a Map</span><br></pre></td></tr></table></figure>
+<p>这相同的语法也能够使用在Java数组上因为由于Velocity封装了数组在访问对象上提供了一个get(Integer)方法,它能返回一个特殊的元素。</p>
+<p>相同的语法可以在任何.get的地方使用，例如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$foo.bar[1].junk</span><br><span class="line">$foo.callMethod()[1]</span><br><span class="line">$foo[&quot;apple&quot;][4]</span><br></pre></td></tr></table></figure>
+<p>一个引用也能够通过索引来进行赋值, 例如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#set($foo[0] = 1)</span><br><span class="line">#set($foo.bar[1] = 3)</span><br><span class="line">#set($map[&quot;apple&quot;] = &quot;orange&quot;)</span><br></pre></td></tr></table></figure>
+<p>指定的元素被赋值给定的值。Velocity 尝试第一次 ‘set’ 方法在元素上, 然后通过’put’ 来进行赋值.</p>
+<p><strong>正式引用标识符</strong><br>
+上面的实例向大家展示了引用标识符的使用, 然后，Velocity也提供了正式引用标识符的引用, 请看下面实例:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$&#123;mudSlinger&#125;</span><br><span class="line">$&#123;customer.Address&#125;</span><br><span class="line">$&#123;purchase.getTotal()&#125;</span><br></pre></td></tr></table></figure>
+<p>在大部分情况下你能够使用标识符引用，但是有些情况下要求正确的符号被要求正确的处理。</p>
+<p>如果你构建一个语句*$vice*被使用作为一个基础语句的单词。它的目的允许有人选择基础单词产生这种结果: “Jack is a pyromaniac.” 或者 “Jack is a kleptomaniac.”。使用简写标识符将不满足这种需求。思考下面的例句:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Jack is a $vicemaniac.</span><br></pre></td></tr></table></figure>
+<p>它是含糊不清的, Velocity认为它是*$vicemaniac*, 而不是*$vice*. 发现变量*$vicemaniac，*没有赋值，它将返回 <em>$vicemaniac</em>. 现在使用正式标识符能够解决这种问题.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Jack is a $&#123;vice&#125;maniac.</span><br></pre></td></tr></table></figure>
+<p>现在Velocity能够识别*$vice*, 而不误认为*$vicemaniac*. 正式引用经常被使用在引用指向邻近文本的模板中.</p>
+<p><strong>静态引用标识符</strong><br>
+当Velocity遇到一个没有定义的引用时，正常的是输出图像引用. 例如, 假如下面的引用是VTL模板的一部分.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;text&quot; name=&quot;email&quot; value=&quot;$email&quot;/&gt;</span><br></pre></td></tr></table></figure>
+<p>当它初始化时, 变量 <em>$email</em>应用并没有值, 但是你宁愿”$email”是一个空白文本字段 . 使用静态引用标识符避免这种正规的行为; 通过在你的VTL模板中使用*$!email*代替$email。上面的实例可以改成下面这种形式:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;text&quot; name=&quot;email&quot; value=&quot;$!email&quot;/&gt;</span><br><span class="line">现在当初始化时如果*$email*没有值, 一个空的字符串将输出代替”$email”。</span><br></pre></td></tr></table></figure>
+<p>正式应用和静态引用经常一起使用，就像下面实例一样.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;text&quot; name=&quot;email&quot; value=&quot;$!&#123;email&#125;&quot;/&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="严格引用模式"><a class="header-anchor" href="#严格引用模式">¶</a>严格引用模式</h2>
+<p>Velocity 1.6介绍了一种新的概念，就是严格引用模式，它是通过配置属性的模式来实现灵活的设置。这种设置的目的是使Velocity的特性更加严格区分没有定义或者模棱两可的实例中, 类似与编程语言, 它更适合Velocity的使用。当遇到没有定义或者模棱两可的情况Velocity将抛出异常。下面将讨论严格应用和传统引用的不同之处。</p>
+<p>设置引用要求在上下文中或者被#set 指令定义否则Velocity将抛异常。在上下文中引用一个null值并不会产生异常。此外，假如你企图在一个对象中调用一个没有定义的方法或者属性时，它将抛异常。如果调用的方法或属性是一个null值也会产生异常。</p>
+<p>在下面的实例中 $bar被定义了但是 $foo却没有被定义,所有这些语句将抛出异常:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$foo                         ## Exception</span><br><span class="line">#set($bar = $foo)            ## Exception</span><br><span class="line">#if($foo == $bar)#end        ## Exception</span><br><span class="line">#foreach($item in $foo)#end  ## Exception</span><br></pre></td></tr></table></figure>
+<p>同时, 你调用一个并不存在的方法或属性时，也会产生异常。在下面的实例中 $bar对象定义一个属性 ‘foo’ 返回一个字符串 , ‘retnull’ 将返回null.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$bar.bogus          ## $bar does not provide property bogus, Exception</span><br><span class="line">$bar.foo.bogus      ## $bar.foo does not provide property bogus, Exception</span><br><span class="line">$bar.retnull.bogus  ## cannot call a property on null, Exception</span><br></pre></td></tr></table></figure>
+<p>一般严格引用使用所有情况除了特殊的 #if 指令.假如一个引用使用 #if 或者#elseif 指令没有任何方法或属性,假如它并没有和其他值进行比较,这种引用是准许的.这种方式通常用来判断一个引用是否被定义. 在下面的实例中$foo 并没有定义但是它也不会抛异常.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#if ($foo)#end                  ## False</span><br><span class="line">#if ( ! $foo)#end               ## True</span><br><span class="line">#if ($foo &amp;&amp; $foo.bar)#end      ## False and $foo.bar will not be evaluated</span><br><span class="line">#if ($foo &amp;&amp; $foo == &quot;bar&quot;)#end ## False and $foo == &quot;bar&quot; wil not be evaluated</span><br><span class="line">#if ($foo1 || $foo2)#end        ## False $foo1 and $foo2 are not defined</span><br></pre></td></tr></table></figure>
+<p>严格模式在 #if 指令中可以使用 &gt;, &lt;, &gt;= or &lt;=. 同时,参数 #foreach必须可以迭代的 (这种特性可以被属性指令.foreach.skip.invalid修改). 不过,在严格模式下没有定义的引用也将抛异常。</p>
+<p>Velocity试图调用一个null值将导致异常. 对于简单的调用在这个实例中你可以用 ‘$!’代替 ‘$’, 这种类似于非严格模式。请记住，当你使用严格引用调用不存在的变量时会出现异常。例如, 下面的$foo 在上下文中值为null</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">this is $foo    ## throws an exception because $foo is null</span><br><span class="line">this is $!foo   ## renders to &quot;this is &quot; without an exception</span><br><span class="line">this is $!bogus ## bogus is not in the context so throws an exception</span><br></pre></td></tr></table></figure>
+<h2 id="模式替换"><a class="header-anchor" href="#模式替换">¶</a>模式替换</h2>
+<p>现在你已经熟悉了引用, 你可以在你的模板中使用它们。Velocity引用利用了一些Java的设计原则进行设计，很容易使用。 例如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$foo</span><br><span class="line">$foo.getBar()</span><br><span class="line">## is the same as</span><br><span class="line">$foo.Bar</span><br><span class="line">$data.setUser(&quot;jon&quot;)</span><br><span class="line">## is the same as</span><br><span class="line">#set( $data.User = &quot;jon&quot; )</span><br><span class="line">$data.getRequest().getServerName()</span><br><span class="line">## is the same as</span><br><span class="line">$data.Request.ServerName</span><br><span class="line">## is the same as</span><br><span class="line">$&#123;data.Request.ServerName&#125;</span><br></pre></td></tr></table></figure>
+<p>这些实例是提供了多重选择，但是效果却是一样的。Velocity利用Java的特性和Bean特性解决上下文中名字在对象和方法中的引用。它是可能的在你的模板中嵌入和引用的值.</p>
+<p>Velocity是模仿sun公司的bean定义的规范，大小写敏感的; 然而，开发者尽可能的避免和纠正用户可能出现的错误 . 当<em>getFoo()</em> 方法在模板中被 $bar.foo引用时, Velocity首先将尝试着调用$getfoo。假如失败了, 它将尝试着调用$getFoo。同样的, 当一个模板引用 $bar.Foo, Velocity首先将尝试着调用 <em>$getFoo()</em> 然后在调用<em>getfoo()</em>.</p>
+<p><em>注意: 在模板中引用实例变量是不允许的。仅仅引用属性等同于 JavaBean getter/setter 方法是可以的 (例如. $foo.Name能够通过 Foo’s getName()实例方法来引用 , 但是不是对一个公共的Name 实例的变量Foo).</em></p>
+<h2 id="指令"><a class="header-anchor" href="#指令">¶</a>指令</h2>
+<p>引用允许设计者在网页上生成动态的内容, 指令很容易使用脚本元素来创建和操纵输出的Java代码，并允许Web设计者关注网页的内容。</p>
+<p>指令一直以 #开始. 像引用一样,指令的名字可能是相等的通过{ 和 } 符号. 这是好的方式在指令后跟文本. 例如下面的程序有一个错误:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#if($a==1)true enough#elseno way!#end</span><br></pre></td></tr></table></figure>
+<p>在这实例中, 使用方括号把 #else 与其他行分开.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#if($a==1)true enough#&#123;else&#125;no way!#end</span><br></pre></td></tr></table></figure>
+<p><strong>#set</strong> <em>#set</em> 指令被用来设定一个引用的值. 这个值能够被分配一个变量引用或者属性引用,这种情况发生在括号中, 如下实例:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#set( $primate = &quot;monkey&quot; )</span><br><span class="line">#set( $customer.Behavior = $primate )</span><br></pre></td></tr></table></figure>
+<p>左边的(LHS)必须分配一个变量引用或者属性引用. 右边的(RHS)可以是以下类型:</p>
+<ul>
+<li>Variable reference</li>
+<li>String literal</li>
+<li>Property reference</li>
+<li>Method reference</li>
+<li>Number literal</li>
+<li>ArrayList</li>
+<li>Map</li>
+</ul>
+<p>这些实例演示了上面的每种类型:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#set( $monkey = $bill ) ## variable reference</span><br><span class="line">#set( $monkey.Friend = &quot;monica&quot; ) ## string literal</span><br><span class="line">#set( $monkey.Blame = $whitehouse.Leak ) ## property reference</span><br><span class="line">#set( $monkey.Plan = $spindoctor.weave($web) ) ## method reference</span><br><span class="line">#set( $monkey.Number = 123 ) ##number literal</span><br><span class="line">#set( $monkey.Say = [&quot;Not&quot;, $my, &quot;fault&quot;] ) ## ArrayList</span><br><span class="line">#set( $monkey.Map = &#123;&quot;banana&quot; : &quot;good&quot;, &quot;roast beef&quot; : &quot;bad&quot;&#125;) ## Map</span><br></pre></td></tr></table></figure>
+<p>注释: 对于定义的ArrayList 实例元素可以使用ArrayList 类里面定义的方法, 例如, 你能够访问上面第一个元素使用$monkey.Say.get(0).</p>
+<p>相似的, 对于Map实例, 元素通过 { } 操作符来定义你能够使用Map类中定义的方法. 例如, 你能够访问上面实例中第一个元素通过$monkey.Map.get(“banana”) 并且返回 ‘good’, 甚至你可以使用 $monkey.Map.banana来返回一样的值.</p>
+<p>RHS也能使用简单的算术表达式:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#set( $value = $foo + 1 )</span><br><span class="line">#set( $value = $bar - 1 )</span><br><span class="line">#set( $value = $foo * $bar )</span><br><span class="line">#set( $value = $foo / $bar )</span><br></pre></td></tr></table></figure>
+<p>假如RHS是一个null的属性和方法引用, 它将不能分配给LHS.这主要依赖你的配置,通过这种机制通常不能移除一个已经存在的引用. (注意它准许你改变Velocity配置属性). 新手对这点比较困惑. 例如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#set( $result = $query.criteria(&quot;name&quot;) )</span><br><span class="line">The result of the first query is $result</span><br><span class="line">#set( $result = $query.criteria(&quot;address&quot;) )</span><br><span class="line">The result of the second query is $result</span><br></pre></td></tr></table></figure>
+<p>如果*$query.criteria(“name”)* 返回”bill”,  <em>$query.criteria(“address”)</em> 返回null, 上面的 VTL将输出如下内容 :</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">The result of the first query is bill</span><br><span class="line">The result of the second query is bill</span><br></pre></td></tr></table></figure>
+<p>对于入门者对于 <em>#foreach</em> 循环企图#set一个应用通过一个属性或者方法引用是很迷惑的,接着通过 <em>#if</em>指令来进行测试. 例如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#set( $criteria = [&quot;name&quot;, &quot;address&quot;] )</span><br><span class="line">#foreach( $criterion in $criteria )</span><br><span class="line">    #set( $result = $query.criteria($criterion) )</span><br><span class="line">    #if( $result )</span><br><span class="line">        Query was successful</span><br><span class="line">    #end</span><br><span class="line">#end</span><br></pre></td></tr></table></figure>
+<p>在上面的实例中, 它并不希望通过*$result* 来决定查询是否成功. <em>$result</em> 之后通过 <em>#set</em> (增加到上下文中),它不能返回为null  (被移除从上下文中). <em>#if</em> 和 <em>#foreach</em>指令相关的细节将在之后的文档中都涉及到.</p>
+<p>一种解决这种情况通过预设 <em>$result</em>为 <em>false</em>. 然后如果 <em>$query.criteria()</em> 调用失败, 你能够检测到.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#set( $criteria = [&quot;name&quot;, &quot;address&quot;] )</span><br><span class="line">#foreach( $criterion in $criteria )</span><br><span class="line">    #set( $result = false )</span><br><span class="line">    #set( $result = $query.criteria($criterion) )</span><br><span class="line">    #if( $result )</span><br><span class="line">        Query was successful</span><br><span class="line">    #end</span><br><span class="line">#end</span><br></pre></td></tr></table></figure>
+<p>不像其他的Velocity指令,<em>#set</em> 指令并没有 <em>#end</em>语句.</p>
+<p><strong>Literals</strong>当你使用 <em>#set</em>指令的时候, 在双引号里面的字符串将被解析, 如下所示:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#set( $directoryRoot = &quot;www&quot; )</span><br><span class="line">#set( $templateName = &quot;index.vm&quot; )</span><br><span class="line">#set( $template = &quot;$directoryRoot/$templateName&quot; )</span><br><span class="line">$template</span><br></pre></td></tr></table></figure>
+<p>输出结果为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">www/index.vm</span><br></pre></td></tr></table></figure>
+<p>然而, 当字符串处在单引号中, 它将不被解析:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#set( $foo = &quot;bar&quot; )</span><br><span class="line">$foo</span><br><span class="line">#set( $blargh = &apos;$foo&apos; )</span><br><span class="line">$blargh</span><br></pre></td></tr></table></figure>
+<p>输出结果是:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bar</span><br><span class="line">$foo</span><br></pre></td></tr></table></figure>
+<p>默认情况, 这种特征使用单引号不解析Velocity中的可用变量. 你也可以通过改变velocity.properties 中的stringliterals.interpolate=false配置来改变这种默认设置.</p>
+<p>或者,  <em>#[[<em>don’t parse me!</em>]]#</em> 语法准许模板设计者很容易的使用大量的语句块,而这些语句块中的变量不会被解析. 它特别有用尤其在避免有大量的指令上地方或者其他无效的内容(不想被解析的)VTL.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#[[</span><br><span class="line">#foreach ($woogie in $boogie)</span><br><span class="line">  nothing will happen to $woogie</span><br><span class="line">#end</span><br><span class="line">]]#</span><br></pre></td></tr></table></figure>
+<p>显示如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#foreach ($woogie in $boogie)</span><br><span class="line">  nothing will happen to $woogie</span><br><span class="line">#end</span><br></pre></td></tr></table></figure>
+<h2 id="条件语句"><a class="header-anchor" href="#条件语句">¶</a>条件语句</h2>
+<p><strong>If / ElseIf / Else</strong></p>
+<p>Velocity中 <em>#if</em> 指令可以包含一段文本当生成Web网页时, 当条件语句为true时. 例如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#if( $foo )</span><br><span class="line">   &lt;strong&gt;Velocity!&lt;/strong&gt;</span><br><span class="line">#end</span><br></pre></td></tr></table></figure>
+<p>变量*$foo*计算出是否是true，下面三种情况哪种情况将发生:</p>
+<ul>
+<li><em>如果是true值时，$foo是一个</em> boolean类型 (true/false)</li>
+<li><em>如果不为空对象或空值时，$foo是一个字符串或条件表达式。</em></li>
+<li><em>如果不为空对象，且不是字符串或条件表达式时，$foo</em>是一个对象。</li>
+</ul>
+<p>记住 Velocity上下文仅仅包含对象，所以当我们说 ‘boolean’,它将代表 Boolean (类)。这是真实的即使这个方法返回的值为布尔值，它内部其实返回的是一个Boolean 值。如果if为true <em>#if</em> 和 <em>#end</em> 内容将输出。在这个实例中, 假如 <em>$foo</em> 为 true, 它将输出为: “Velocity!”。相反的, 假如 <em>$foo</em> 有一个 null 值，或者它的布尔值为false, 这个语句的结果为false,这里将没有输出。</p>
+<p><em>#elseif</em> 或者 <em>#else</em> 元素能够和*#if* 元素一起使用. 注意Velocity 模板将停止在第一个表达式中当发现第一个表达式为true时, 假设*$foo*值为 15 <em>$bar</em> 值为6.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#if( $foo &lt; 10 )</span><br><span class="line">    &lt;strong&gt;Go North&lt;/strong&gt;</span><br><span class="line">#elseif( $foo == 10 )</span><br><span class="line">    &lt;strong&gt;Go East&lt;/strong&gt;</span><br><span class="line">#elseif( $bar == 6 )</span><br><span class="line">    &lt;strong&gt;Go South&lt;/strong&gt;</span><br><span class="line">#else</span><br><span class="line">    &lt;strong&gt;Go West&lt;/strong&gt;</span><br><span class="line">#end</span><br></pre></td></tr></table></figure>
+<p>在这个实例中, <em>$foo</em> 大于10，所以第一个两个比较是false。下一个*$bar* 和6相等, 所以显示true, 所以输出 <strong>Go South。</strong></p>
+<p><strong>关系和逻辑操作符</strong></p>
+<p>Velocity 使用等号决定两个变量之间的关系. 下面简单实例展示了等会的怎么使用.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#set ($foo = &quot;deoxyribonucleic acid&quot;)</span><br><span class="line"></span><br><span class="line">#set ($bar = &quot;ribonucleic acid&quot;)</span><br><span class="line">#if ($foo == $bar)</span><br><span class="line">  In this case it&apos;s clear they aren&apos;t equivalent. So...</span><br><span class="line">#else</span><br><span class="line">  They are not equivalent and this will be the output.</span><br><span class="line">#end</span><br></pre></td></tr></table></figure>
+<p>注意 <em>==</em> 语法和Java中的语法是不同,Java中==仅仅表示对象是否相等. Velocity中的等号操作符仅仅表示两个数字,字符串,或对象的比较。当两个类对象是不同时, 字符串是通过调用toString()来获取的然后来比较.</p>
+<p>Velocity的逻辑操作符有AND, OR 和NOT 操作符. 下面的逻辑操作符显示了 AND, OR 和NOT 操作符的使用.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">## logical AND</span><br><span class="line">#if( $foo &amp;&amp; $bar )</span><br><span class="line">   &lt;strong&gt; This AND that&lt;/strong&gt;</span><br><span class="line">#end</span><br></pre></td></tr></table></figure>
+<p><em>#if()</em> 指令结果为true 假如 <em>$foo</em> 和*$bar<em>都为true. 如果 <em>$foo</em>为false,表达式的结果为 false; <em>$bar</em>将不会计算. 如果 <em>$foo</em> 为 true,Velocity模板将计算</em>$bar*的值; 如果 <em>$bar</em>为 true, 然后整个表达式为true输出 <strong>This AND that</strong> . 如果 <em>$bar</em>为 false,如果表达式为false这里将没有输出.</p>
+<p>逻辑表达OR 操作符也是这种情况,仅仅只有一种情况需要计算总个表达式,就是整个表达式为true.思考下面的实例.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">## logical OR</span><br><span class="line">#if( $foo || $bar )</span><br><span class="line">    &lt;strong&gt;This OR That&lt;/strong&gt;</span><br><span class="line">#end</span><br></pre></td></tr></table></figure>
+<p>如果*$foo<em>为 true, Velocity模板不需要计算</em>$bar*; 不管*$bar* 是否为 true 或 false, 这整个表达式为true,<strong>This OR That</strong> 将被输出. 如果 <em>$foo</em> 为 false, 然而, <em>$bar</em>必须需要计算. 在这个实例中, 如果 <em>$bar</em> 也为 false,这表达式结果为 false 这里没有任何输出. 另一方面, 如果*$bar* 为 true, 然而整个表达式为true, 输出的结构是 <strong>This OR That</strong></p>
+<p>逻辑运算符NOT ,这里仅仅有一个参数 :</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">##logical NOT</span><br><span class="line">#if( !$foo )</span><br><span class="line">  &lt;strong&gt;NOT that&lt;/strong&gt;</span><br><span class="line">#end</span><br></pre></td></tr></table></figure>
+<p>这里, 如果*$foo<em>为 true, 然后</em>!$foo<em>计算结果为false,这里没有输出。如果 <em>$foo</em>为 false, 然而 <em>!$foo</em>计算结果为true 输出结果为 <strong>NOT that</strong> . 注意不要把它和静态引用 <em>$!foo</em> which混淆，它们是不同的。</em>（ifeve.com校对注：一个!在前，一个在后）*</p>
+<p>这里也有字符形式的逻辑运算符如 <em>eq</em>, <em>ne</em>, <em>and</em>, <em>or</em>, <em>not</em>, <em>gt</em>, <em>ge</em>, <em>lt</em>, 和<em>le</em>.</p>
+<p>温馨提示.当你希望在*#else* 指令后面包含一个文本你需要把else放在一个大括号 里面来表示它与后面的文本是不同的. (任何指令都能被放在括号里面, 通常用在*#else*中)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#if( $foo == $bar)it&apos;s true!#&#123;else&#125;it&apos;s not!#end&lt;/li&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="循环"><a class="header-anchor" href="#循环">¶</a>循环</h2>
+<p><strong>Foreach Loop</strong>The <em>#foreach</em>元素用来循环操作. 例如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">#foreach( $product in $allProducts )</span><br><span class="line">    &lt;li&gt;$product&lt;/li&gt;</span><br><span class="line">#end</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
+<p><em>#foreach</em>循环将把 <em>$allProducts</em>列表里面的值赋值给products . 每次遍历, <em>$allProducts</em> 里面的值将赋值给*$product*.</p>
+<p><em>$allProducts</em> 变量的内容是一个数组, Hashtable 或者 Array. 分配给*$product* 变量的值是Java的对象和一个变量的引用. 例如, 假如 <em>$product</em>是Java里面一个真实的Product类, 它的名字能够被引用 <em>$<a href="http://product.Name" target="_blank" rel="noopener">product.Name</a></em> 方法(ie: <em>$Product.getName()</em>).</p>
+<p>比方说 <em>$allProducts</em> 是一个Hashtable. 假如你想引用Hashtable 里面的key, 你的代码可以这样写:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">#foreach( $key in $allProducts.keySet() )</span><br><span class="line">    &lt;li&gt;Key: $key -&gt; Value: $allProducts.get($key)&lt;/li&gt;</span><br><span class="line">#end</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
+<p>Velocity提供了一种简单的循环计数以至于你能够做一些事情,如下所示:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;table&gt;</span><br><span class="line">#foreach( $customer in $customerList )</span><br><span class="line">    &lt;tr&gt;&lt;td&gt;$foreach.count&lt;/td&gt;&lt;td&gt;$customer.Name&lt;/td&gt;&lt;/tr&gt;</span><br><span class="line">#end</span><br><span class="line">&lt;/table&gt;</span><br></pre></td></tr></table></figure>
+<p>Velocity也提供了一种简单的方式来判断是否是最后一次迭代 :</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#foreach( $customer in $customerList )</span><br><span class="line">    $customer.Name#if( $foreach.hasNext ),#end</span><br><span class="line">#end</span><br></pre></td></tr></table></figure>
+<p>如果你想从零开始的#foreach循环, 你可以使用 $foreach.index 代替$foreach.count. 同样的, $foreach.first 和 $foreach.last 也提供了$foreach.hasNext方式.如果你想访问 #foreach外面的这些属性, 你能够引用它们通过 $foreach.parent或 $foreach.topmost 属性 (e.g. $foreach.parent.index 或者 $foreach.topmost.hasNext).</p>
+<p>你也可以设置最大的循环执行次数. 默认情况下没有设置 (可以指定一个值 0 或者更小的), 可以设置一个数字在velocity.properties 的配置文件里面. This is useful as a fail-safe.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># The maximum allowed number of loops.</span><br><span class="line">directive.foreach.maxloops = -1</span><br></pre></td></tr></table></figure>
+<p>如果你想停止一个foreach循环在你的模板中, 你可以使用 #break指令在任何时候停止循环:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">## list first 5 customers only</span><br><span class="line">#foreach( $customer in $customerList )</span><br><span class="line">    #if( $foreach.count &gt; 5 )</span><br><span class="line">        #break</span><br><span class="line">    #end</span><br><span class="line">    $customer.Name</span><br><span class="line">#end</span><br></pre></td></tr></table></figure>
+<h2 id="引入"><a class="header-anchor" href="#引入">¶</a>引入</h2>
+<p><em>#include</em>脚本元素准许设计者引入一个本地文件, 然后插入到你#include 指令所在的地方。文件的内容不经过模板引擎处理. 由于安全的原因,这个文件仅仅能够放在 TEMPLATE_ROOT下面.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#include( &quot;one.txt&quot; )</span><br></pre></td></tr></table></figure>
+<p><em>#include</em> 指定指向的文件放在括号之内. 假如包含多个文件,通过逗号进行分开.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#include( &quot;one.gif&quot;,&quot;two.txt&quot;,&quot;three.htm&quot; )</span><br></pre></td></tr></table></figure>
+<p>被引用的文件不需要通过名字引用; 实际上，通常使用一个变量来代替文件名。当你请求输出标准页面时非常方便。下面实例展示了文件名和变量.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#include( &quot;greetings.txt&quot;, $seasonalstock )</span><br></pre></td></tr></table></figure>
+<h2 id="解析"><a class="header-anchor" href="#解析">¶</a>解析</h2>
+<p><em>#parse</em>脚本元素准许模板设计者引用一个包含VTL的本地文件。Velocity将解析其中的VTL并输出里面的元素。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#parse( &quot;me.vm&quot; )</span><br></pre></td></tr></table></figure>
+<p>向 <em>#include</em>指令, <em>#parse</em>可以被看着携带一个变量而不是模板. 任何被 <em>#parse</em> 指令引用的模板必须放在TEMPLATE_ROOT下面. 不像 <em>#include</em>指令, <em>#parse</em> 仅仅携带了一个参数.</p>
+<p>VTL模板中*#parse<em>应用的文件能够够嵌套引用包含</em>#parse<em>的模板. 默认为 10, 用户可以通过velocity.properties 中directive.parse.max.depth来自定义设置单个文件中</em>#parse<em>引用文件个数. (注意: 如果 velocity.properties文件中</em>directive.parse.max.depth*没有设置, Velocity默认为10.) 准许递归调用, 例如,如果dofoo.vm 模板包含下面的语句:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Count down.</span><br><span class="line">#set( $count = 8 )</span><br><span class="line">#parse( &quot;parsefoo.vm&quot; )</span><br><span class="line">All done with dofoo.vm!</span><br></pre></td></tr></table></figure>
+<p>如果你引用parsefoo.vm模板, 它可以包含下面的VTL文件:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$count</span><br><span class="line">#set( $count = $count - 1 )</span><br><span class="line">#if( $count &gt; 0 )</span><br><span class="line">    #parse( &quot;parsefoo.vm&quot; )</span><br><span class="line">#else</span><br><span class="line">    All done with parsefoo.vm!</span><br><span class="line">#end</span><br></pre></td></tr></table></figure>
+<p>“Count down.” 之后的被显示, Velocity能够解析parsefoo.vm, 把count设置为8. 当count大于0, 它将显示 “All done with parsefoo.vm!” . 本实例中, Velocity将返回 dofoo.vm 并输出 “All done with dofoo.vm!” 语句.</p>
+<h2 id="break"><a class="header-anchor" href="#break">¶</a>Break</h2>
+<p><em>#break</em>指令停止任何正在执行的作用域中的输出. 执行作用域是本质上是 with content (i.e. #foreach, #parse, #evaluate, #define, #macro, 或者 #@somebodymacro) 或者 任何”root” 作用域(例如. template.merge(…), Velocity.evaluate(…) or velocityEngine.evaluate(…)). 不像#stop, #break 它仅仅停止的是循环内部, 作用域内部, 而不是整个程序.</p>
+<p>如果你希望停止一个正在执行的作用域, 你可以使用作用域控制引用(例如. $foreach, $template, $evaluate, $define, $macro, or $somebodymacro) 作为一个参数#break. (例如. #break($macro)). 它将停止输出所有的到指定的一个. 在同一类型的嵌套范围内, 你能够访问它的父亲通过 $<scope>.parent 或者 $<scope>.最高的和传递这些到#break 代替(例如. #break($foreach.parent) o或者 #break($macro.topmost)).</scope></scope></p>
+<h2 id="stop指令"><a class="header-anchor" href="#stop指令">¶</a>Stop指令</h2>
+<p><em>#stop</em> 指令停止任何正在执行的输出。这是真实的即使嵌套另一个模板通过 #parse 指令或者位于一个velocity macro. 合并输出将包括所有的内容到遇到 #stop 指令的位置. 它是很方便的随时终止模板解析.出入调试的目的, 你可以提供一个将被写到stop命令执行前日志 (DEBUG 级别, 当然是)消息参数 (例如. #stop(‘$foo 并不在内容中’) ).</p>
+<h2 id="evaluate指令"><a class="header-anchor" href="#evaluate指令">¶</a>Evaluate指令</h2>
+<p><em>#evaluate</em>指令用来动态的计算。它可以在加载的时候适时计算一个字符串. 例如一个字符串可能被用来国家化或则包括一部分数据库模板.</p>
+<p>下面的实例将显示abc.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#set($source1 = &quot;abc&quot;)</span><br><span class="line">#set($select = &quot;1&quot;)</span><br><span class="line">#set($dynamicsource = &quot;$source$select&quot;)</span><br><span class="line">## $dynamicsource is now the string &apos;$source1&apos;</span><br><span class="line">#evaluate($dynamicsource)</span><br></pre></td></tr></table></figure>
+<h2 id="define指令"><a class="header-anchor" href="#define指令">¶</a>Define指令</h2>
+<p><em>#define</em>指令可以指定对VTL一个块的引用.</p>
+<p>下面的实例将显示: Hello World!.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#define( $block )Hello $who#end</span><br><span class="line">#set( $who = &apos;World!&apos; )</span><br><span class="line">$block</span><br></pre></td></tr></table></figure>
+<h2 id="宏调用"><a class="header-anchor" href="#宏调用">¶</a>宏调用</h2>
+<p><em>#macro</em> 脚本元素准许模板设计者定义一个可重用的VTL模板片段. Velocimacros(宏调用)被广泛用在简单和复杂的场景中.Velocimacro可以用来保存用户的点击次数和最少的板式错误, 提供一个简单的概念介绍。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#macro( d )</span><br><span class="line">&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;</span><br><span class="line">#end</span><br></pre></td></tr></table></figure>
+<p>上个实例中Velocimacr被定义为<em>d</em>, 它可以像其他VTL方式一样被调用:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#d()</span><br></pre></td></tr></table></figure>
+<p>当*#d()<em>被调用的时, Velocity将用定义的一行内容来替换</em>#d()*.如果你想在行里面添加内容, 你也可以向下面这样来改变macro的定义:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#macro( d )</span><br><span class="line">&lt;tr&gt;&lt;td&gt;$!bodyContent&lt;/td&gt;&lt;/tr&gt;</span><br><span class="line">#end</span><br></pre></td></tr></table></figure>
+<p>现在, 如果你想调用macro会和之前有点不同, 名字之前需要加上#@ 加上一个内容体,同时以#end调用, 当Velocity加载时遇见 $!bodyContent会进行显示:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#@d()Hello!#end</span><br></pre></td></tr></table></figure>
+<p>如果你一直坚持像之前那种方式调用, 我们使用隐形的引用代替body引用($!bodyContent 代替$bodyContent), 它将一直显示一个空的单元格.</p>
+<p>Velocimacro也可以携带许多参数 — 甚至是不带参数, 如同第一个实例中, 参数是可选项– 但是当Velocimacro执行时, 它必须调用和你定义的方法的参数匹配. 被执行的Velocimacros要多于上面定义的. 下面实例所示一个Velocimacro携带两个参数一个是color和一个数组.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#macro( tablerows $color $somelist )</span><br><span class="line">#foreach( $something in $somelist )</span><br><span class="line">    &lt;tr&gt;&lt;td bgcolor=$color&gt;$something&lt;/td&gt;&lt;/tr&gt;</span><br><span class="line">#end</span><br><span class="line">#end</span><br></pre></td></tr></table></figure>
+<p>上面的Velocimacro实例中, 定义一个<em>tablerows</em>,带两个参数. 第一个参数是*$color*, 第二个参数是 <em>$somelist</em>.</p>
+<p>任何可以被放到VTL模板中都可以作为Velocimacro的函数体.  <em>tablerows</em> 是Velocimacro的一个 <em>foreach</em>语句. 这里有两个 <em>#end</em>语句被定义在*#tablerows*中; 第一个是属于 <em>#foreach</em>, 第二个是属于Velocimacro .</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#set( $greatlakes = [&quot;Superior&quot;,&quot;Michigan&quot;,&quot;Huron&quot;,&quot;Erie&quot;,&quot;Ontario&quot;] )</span><br><span class="line">#set( $color = &quot;blue&quot; )</span><br><span class="line">&lt;table&gt;</span><br><span class="line">    #tablerows( $color $greatlakes )</span><br><span class="line">&lt;/table&gt;</span><br></pre></td></tr></table></figure>
+<p>注意*$greatlakes* 代替 <em>$somelist</em>. 当 <em>#tablerows</em>被调用时, 将输出以下内容:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;table&gt;</span><br><span class="line">    &lt;tr&gt;&lt;td bgcolor=&quot;blue&quot;&gt;Superior&lt;/td&gt;&lt;/tr&gt;</span><br><span class="line">    &lt;tr&gt;&lt;td bgcolor=&quot;blue&quot;&gt;Michigan&lt;/td&gt;&lt;/tr&gt;</span><br><span class="line">    &lt;tr&gt;&lt;td bgcolor=&quot;blue&quot;&gt;Huron&lt;/td&gt;&lt;/tr&gt;</span><br><span class="line">    &lt;tr&gt;&lt;td bgcolor=&quot;blue&quot;&gt;Erie&lt;/td&gt;&lt;/tr&gt;</span><br><span class="line">    &lt;tr&gt;&lt;td bgcolor=&quot;blue&quot;&gt;Ontario&lt;/td&gt;&lt;/tr&gt;</span><br><span class="line">&lt;/table&gt;</span><br></pre></td></tr></table></figure>
+<p>Velocimacros能够定义在Velocity模板的行内，意味着在同一个网页上它不可以使用其他的Velocity模板。定义一个Velocimacro并在所有模板中共享,这使它具有明显的优势: 它避免了在各个页面中重复定义Velocimacro, 减少工作量并且可以避免错误, 这种也可以通过改变一个地方而达到其他地方一起修改的目的.</p>
+<p><em>#tablerows($color $list)</em> Velocimacro 被定义在 Velocimacros 模板的依赖包中, 它可以保证在其他地方被大量使用. 它能够被多次重复使用来解决不同的问题. 在模板 mushroom.vm 中专注与正真的事情,<em>#tablerows</em> Velocimacro 能够被遍历,显示所有部分:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#set( $parts = [&quot;volva&quot;,&quot;stipe&quot;,&quot;annulus&quot;,&quot;gills&quot;,&quot;pileus&quot;] )</span><br><span class="line">#set( $cellbgcol = &quot;#CC00FF&quot; )</span><br><span class="line">&lt;table&gt;</span><br><span class="line">#tablerows( $cellbgcol $parts )</span><br><span class="line">&lt;/table&gt;</span><br></pre></td></tr></table></figure>
+<p>当你请求mushroom.vm, Velocity 将在模板依赖包中查询*#tablerows* (在 velocity.properties 定义的) 并输出下面内容:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;table&gt;</span><br><span class="line">    &lt;tr&gt;&lt;td bgcolor=&quot;#CC00FF&quot;&gt;volva&lt;/td&gt;&lt;/tr&gt;</span><br><span class="line">    &lt;tr&gt;&lt;td bgcolor=&quot;#CC00FF&quot;&gt;stipe&lt;/td&gt;&lt;/tr&gt;</span><br><span class="line">    &lt;tr&gt;&lt;td bgcolor=&quot;#CC00FF&quot;&gt;annulus&lt;/td&gt;&lt;/tr&gt;</span><br><span class="line">    &lt;tr&gt;&lt;td bgcolor=&quot;#CC00FF&quot;&gt;gills&lt;/td&gt;&lt;/tr&gt;</span><br><span class="line">    &lt;tr&gt;&lt;td bgcolor=&quot;#CC00FF&quot;&gt;pileus&lt;/td&gt;&lt;/tr&gt;</span><br><span class="line">&lt;/table&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>Velocimacro Arguments</strong>Velocimacros可以携带下面的VTL元素作为参数 :</p>
+<ul>
+<li>Reference : anything that starts with ‘$’</li>
+<li>String literal : something like “$foo” or ‘hello’</li>
+<li>Number literal : 1, 2 etc</li>
+<li>IntegerRange : [ 1…2] or [$foo … $bar]</li>
+<li>ObjectArray : [ “a”, “b”, “c”]</li>
+<li>boolean value true</li>
+<li>boolean value false</li>
+</ul>
+<p>当传递一个引用作为Velocimacros的参数时,注意引用是通过名字传递的. 这意味着它们的值是在Velocimacro中已经生成了. 这个特性准许你传递一个方法的调用引用在方法中也可以使用方法调用. 例如, 当我们调用下面的Velocimacro将显示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#macro( callme $a )</span><br><span class="line">    $a $a $a</span><br><span class="line">#end</span><br><span class="line">#callme( $foo.bar() )</span><br></pre></td></tr></table></figure>
+<p>在方法中 bar() 的结果将被调用三次.</p>
+<p>第一次看到这个特性会发现很惊奇, 当你仔细的思考Velocimacros背后的动机–消除VTL中公共的重复使用 –它变的有意义. 它准许你做一些事情,比如传递一个对象的状态, 例如在Velocimacro中重复生成有颜色的表格对象.</p>
+<p>如果你不想使用这个特性,你就想从一个引用的方法中获取值,你可以这样做 :</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#set( $myval = $foo.bar() )</span><br><span class="line">#callme( $myval )</span><br></pre></td></tr></table></figure>
+<p><strong>Velocimacro Properties</strong>在 velocity.properties 文件中准许灵活的实现Velocimacros. 这里也提供了开发者文档<a href="http://velocity.apache.org/engine/devel/developer-guide.html" target="_blank" rel="noopener">Developer Guide</a>.</p>
+<p>velocimacro.library – 一个通用的和其他依赖包分开的 Velocimacro模板依赖包. 默认, Velocity看起来想一个单独的 函数库: <em>VM_global_library.vm</em>. 配置模板的路径用来使用找到Velocimacro 函数库.</p>
+<p>velocimacro.permissions.allow.inline – 这个属性的值可以是true或者false, 决定是否可以在模板中定义Velocimacros. 默认情况是, true, 准许模板设计者可以自行定义Velocimacros.</p>
+<p>velocimacro.permissions.allow.inline.to.replace.global -它的值可以设定为true或者false, 这个设置准许用户指定一个模板中定义的Velocimacro能代替全局定义, 它在启动的时候被 velocimacro.library属性加载. 默认是, false, 避免在启动时候模板中定义的Velocimacros成为全局Velocimacros.</p>
+<p>velocimacro.permissions.allow.inline.local.scope – 这个属性可能值为true 或者 false, 默认为 false, 控制 定义的Velocimacros对定义中的模板是可见的.简而言之, 如果这个属性设置为 true, 一个模板能够定义能够被定义的模板使用的VMs内 . You can use this for fancy VM tricks – if a global VM calls another global VM, 在行内的作用域内, 一个模板能够定义一个私有的实现第二个VM,它能被第一个VM调用. 但是对其他模板没有影响.</p>
+<p>velocimacro.library.autoreload – 这个属性控制Velocimacro依赖包自动加载. 这个默认是的是false.当把属性设置为 true,当Velocimacro被执行时它将检查Velocimacro是否改变, 它重载很有必要的.它准许你改变和测试Velocimacro 不需要重庆你的应用和服务器容器, 仅仅像你可以用普通的模板. 这个模式需要关闭缓存才起作用(e.g.file.resource.loader.cache = false ). 这个特征主要用于开发模式, 而不是生产模式.</p>
+<h2 id="获取字面量"><a class="header-anchor" href="#获取字面量">¶</a>获取字面量</h2>
+<p>VTL使用了特殊字符,例如 <em>$</em> 和 <em>#</em>, 做为关键字, 所以一些使用者关注在模板中怎么使用这些字符.这章将讨论转义字符 .</p>
+<p><strong>Currency(通用)</strong><br>
+你这样写是没有问题的 “I bought a 4 lb. sack of potatoes at the farmer’s market for only $2.50!” 像上面提到的一样, VTL 标识符一直都是以大写或者小写的字母开始的, 所以 $2.50 不会被错误引用.</p>
+<p><strong>Escaping Valid VTL References(屏蔽VTL中的引用)</strong><br>
+你可能遇到这种情况,在Velocity中不想有一个引用输出. 屏蔽特殊的字符是输出特殊字符的最好的方式, 你可以使用反斜杠字符,当遇见这些特殊的字符是VTL引用的一部分时. <a href="http://velocity.apache.org/engine/devel/user-guide.html#escapinginvalidvtlreferences" target="_blank" rel="noopener">*</a></p>
+<figure class="highlight leaf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">#</span><span class="title">set</span><span class="params">( $<span class="variable">email</span> = <span class="string">"foo"</span> )</span></span></span><br><span class="line">$email</span><br></pre></td></tr></table></figure>
+<p>假如在你的Velocity 模板中遇到一个 <em>$email</em>,它将在上下文中查询并输出正确的值. 上实例中将输出 <em>foo</em>, 因为*$email* 已经被定义了.如果 <em>$email</em>is没有被定义, 它将输出*$email*.</p>
+<p>加入 <em>$email</em> 已经定义了 (例如, 它的值为 <em>foo</em>), 但是你想输出 <em>$email</em>. 这里有几种方式可以实现, 最简单的方式是使用转义字符. 请看下面实例:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">## The following line defines $email in this template:</span><br><span class="line">#set( $email = &quot;foo&quot; )</span><br><span class="line">$email</span><br><span class="line">\$email</span><br></pre></td></tr></table></figure>
+<p>输出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">foo</span><br><span class="line">$email</span><br></pre></td></tr></table></figure>
+<p>如果,由于某种原因, 你需要在它之前添加一个反斜杠, 你需要按照下面实例做:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">## The following line defines $email in this template:</span><br><span class="line">#set( $email = &quot;foo&quot; )</span><br><span class="line">\\$email</span><br><span class="line">\\\$email</span><br></pre></td></tr></table></figure>
+<p>输出结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">\foo</span><br><span class="line">\$email</span><br></pre></td></tr></table></figure>
+<p>注意 <em>* 字符绑定到</em>$* 左边的字符. 左边绑定规则导致 <em>\$email</em> 输出为*$email*. 比较下面实例看看*$email*是否被定义.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$email</span><br><span class="line">\$email</span><br><span class="line">\\$email</span><br><span class="line">\\\$email</span><br></pre></td></tr></table></figure>
+<p>输出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$email</span><br><span class="line">\$email</span><br><span class="line">\\$email</span><br><span class="line">\\\$email</span><br></pre></td></tr></table></figure>
+<p>注意Velocity定义的引用不同于那些没有定义的引用 . 本实例中*$foo* 定义值为<em>gibbous</em>.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#set( $foo = &quot;gibbous&quot; )</span><br><span class="line">$moon = $foo</span><br></pre></td></tr></table></figure>
+<p>输出结果为: <em>$moon = gibbous</em> — <em>$moon</em>将作为字符输出而$foo的地方将输出<em>gibbous</em>.</p>
+<p><strong>Escaping Invalid VTL References(转义不可用VTL引用)</strong><br>
+有时候你可能会遇到这种情况,当你的Velocity解析你的模板时遇见了一个你从来都没有打算把它当着引用的不可用的引用. 屏蔽特殊的字符, 最好的方式是你能够处理把握这种情况,在这种情况下, 反斜杠可能会失败. 你可以使用简单的方式来屏蔽关于 $ 或 #问题, 你可能仅仅是替换一下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;my:invalid:non:reference&#125;</span><br></pre></td></tr></table></figure>
+<p>可以想这样</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#set( $D = &apos;$&apos; )</span><br><span class="line">$&#123;D&#125;&#123;my:invalid:non:reference&#125;</span><br></pre></td></tr></table></figure>
+<p>你也可以通过Java代码把  $ 或 #字符串指令放到你的文本中  (例如 context.put(“D”,&quot;$&quot;);)来避免在你的模板中添加额外的 #set() 指令. 或者, 你也可以使用<a href="http://velocity.apache.org/tools/devel/" target="_blank" rel="noopener">VelocityTools</a>, 你可以使用EscapeTool:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;esc.d&#125;&#123;my:invalid:non:reference&#125;</span><br></pre></td></tr></table></figure>
+<p>有效的和无效的VTL 指令使用同样的方式进行转义的; 在指令章节将对此进行详细描述.</p>
+<p><strong>Escaping VTL Directives(转义VTL指令)</strong><br>
+VTL 指令能够被屏蔽通过反斜杠(“\”) 字符和疲敝VTL引用方式是一样的.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">## #include( &quot;a.txt&quot; ) renders as &lt;contents of a.txt&gt;</span><br><span class="line">#include( &quot;a.txt&quot; )</span><br><span class="line">## \#include( &quot;a.txt&quot; ) renders as #include( &quot;a.txt&quot; )</span><br><span class="line">\#include( &quot;a.txt&quot; )</span><br><span class="line">## \\#include ( &quot;a.txt&quot; ) renders as \&lt;contents of a.txt&gt;</span><br><span class="line">\\#include ( &quot;a.txt&quot; )</span><br></pre></td></tr></table></figure>
+<p>需要特别关心的是转义在一个单独的指令中包含多个脚本元素VTL 指令(例如在一个 if-else-end语句). 这里是一个典型的VTL if语句:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#if( $jazz )</span><br><span class="line">    Vyacheslav Ganelin</span><br><span class="line">#end</span><br></pre></td></tr></table></figure>
+<p>如果 <em>$jazz</em>为 true, 输出结果为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vyacheslav Ganelin</span><br></pre></td></tr></table></figure>
+<p>如果*$jazz* 为false,这里没有任何输出. Escaping 脚本元素修改输出结果. 考虑下面实例:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\#if( $jazz )</span><br><span class="line">    Vyacheslav Ganelin</span><br><span class="line">\#end</span><br></pre></td></tr></table></figure>
+<p>它将导致指令被忽略, 但是变量 <em>$jazz</em> 正常显示. 所以, 如果*$jazz* 为 true,输出结果是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#if( true )</span><br><span class="line">    Vyacheslav Ganelin</span><br><span class="line">#end</span><br></pre></td></tr></table></figure>
+<p>如果脚本之前的元素被反斜杠转义:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\\#if( $jazz )</span><br><span class="line">   Vyacheslav Ganelin</span><br><span class="line">\\#end</span><br></pre></td></tr></table></figure>
+<p>在本实例中, 如果*$jazz* 为 true,输出为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">\ Vyacheslav Ganelin</span><br><span class="line">\</span><br></pre></td></tr></table></figure>
+<p>为了了解这一点,注意 #if( arg ) 如果在新的一行结束时,输出时将省略这一行. 另外,  #if() 的语句块将紧跟着 ‘\’,  在#if()之前加入两个’\’. 最后的 \和文本在不同的行因为在 ‘Ganelin’之后有一个新行, 所以最终\, #end 之前的部分是程序体.</p>
+<p>如果*$jazz*是 false, 输出结果为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\</span><br></pre></td></tr></table></figure>
+<p>注意一些执行将被中断如果元素没有属性被转义.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\\\#if( $jazz )</span><br><span class="line">    Vyacheslave Ganelin</span><br><span class="line">\\#end</span><br></pre></td></tr></table></figure>
+<p>这里 <em>#if</em> 被转义, 但是这里保留一个 <em>#end</em> 标签; 多余的标签将导致解析错误.</p>
+<h2 id="格式化问题"><a class="header-anchor" href="#格式化问题">¶</a>格式化问题</h2>
+<p>虽然VTL的用户使用指南中经常显示换行符和空格,VTL显示如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#set( $imperial = [&quot;Munetaka&quot;,&quot;Koreyasu&quot;,&quot;Hisakira&quot;,&quot;Morikune&quot;] )</span><br><span class="line">#foreach( $shogun in $imperial )</span><br><span class="line">    $shogun</span><br><span class="line">#end</span><br></pre></td></tr></table></figure>
+<p>上面实例和下面实例是等效的, Geir Magnusson Jr. 写给用户的邮件来说明这点完全无关:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Send me #set($foo=[&quot;$10 and &quot;,&quot;a pie&quot;])#foreach($a in $foo)$a#end please.</span><br></pre></td></tr></table></figure>
+<p>Velocity可以去掉多余的空格. 前面的指令可以写成:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Send me</span><br><span class="line">#set( $foo = [&quot;$10 and &quot;,&quot;a pie&quot;] )</span><br><span class="line">#foreach( $a in $foo )</span><br><span class="line">$a</span><br><span class="line">#end</span><br><span class="line">please.</span><br></pre></td></tr></table></figure>
+<p>输出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Send me</span><br><span class="line">#set($foo       = [&quot;$10 and &quot;,&quot;a pie&quot;])</span><br><span class="line">                 #foreach           ($a in $foo )$a</span><br><span class="line">         #end please.</span><br></pre></td></tr></table></figure>
+<p>在这些实例中输出结果将是一样的.</p>
+<h2 id="其他的特性和杂记"><a class="header-anchor" href="#其他的特性和杂记">¶</a>其他的特性和杂记</h2>
+<h3 id="math-算术操作"><a class="header-anchor" href="#math-算术操作">¶</a>Math(算术操作)</h3>
+<p>Velocity中内置了一个算术函数,这些函数你可以在VTL模板中进行调用 .下面的实例分别展示加减乘数的使用:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#set( $foo = $bar + 3 )</span><br><span class="line">#set( $foo = $bar - 4 )</span><br><span class="line">#set( $foo = $bar * 6 )</span><br><span class="line">#set( $foo = $bar / 2 )</span><br></pre></td></tr></table></figure>
+<p>当两个整数相除时,结果是整数, 小数部分被丢弃. 模板中也可以使用求模运算符 (<em>%</em>).</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#set( $foo = $bar % 5 )</span><br></pre></td></tr></table></figure>
+<h3 id="范围操作符"><a class="header-anchor" href="#范围操作符">¶</a>范围操作符</h3>
+<p>范围操作符能够结合着 <em>#set</em> 和 <em>#foreach</em> 语句使用. 用它能够产生一个证书数组,它的语法结果如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[n..m]</span><br></pre></td></tr></table></figure>
+<p>产生一个n到m的整数. 不论m大于或者小于n都不重要;在这个实例中这个范围就是简单的计算.下面的实例展示了范围操作符的使用:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">第一个实例:</span><br><span class="line">#foreach( $foo in [1..5] )</span><br><span class="line">$foo</span><br><span class="line">#end</span><br><span class="line"></span><br><span class="line">第二个实例:</span><br><span class="line">#foreach( $bar in [2..-2] )</span><br><span class="line">$bar</span><br><span class="line">#end</span><br><span class="line"></span><br><span class="line">第三个实例:</span><br><span class="line">#set( $arr = [0..1] )</span><br><span class="line">#foreach( $i in $arr )</span><br><span class="line">$i</span><br><span class="line">#end</span><br><span class="line"></span><br><span class="line">第四个实例:</span><br><span class="line">[1..3]</span><br></pre></td></tr></table></figure>
+<p>输出结果为:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">第一个实例:</span><br><span class="line">1 2 3 4 5</span><br><span class="line"></span><br><span class="line">第二个实例:</span><br><span class="line">2 1 0 -1 -2</span><br><span class="line"></span><br><span class="line">第三个实例:</span><br><span class="line">0 1</span><br><span class="line"></span><br><span class="line">第四个实例:</span><br><span class="line">[1..3]</span><br></pre></td></tr></table></figure>
+<p>注意范围操作符仅仅产生数组当结合 <em>#set</em> 和 <em>#foreach</em> 指令, 正如在第四个例子中展示的.</p>
+<p>网页设计者关系一个制作标准大小的表格, 有些情况下没有足够的数据填充表格, 将发现范围操作符特别有用.</p>
+<h3 id="高级问题-转义和"><a class="header-anchor" href="#高级问题-转义和">¶</a>高级问题:转义和!</h3>
+<p>当一个引用前面加上*!* 字符和*!* 字符前面加上一个 ** 转义字符, 这种引用需要一种特殊的处理方式. 注意正规的转义符和特殊的\之后紧跟 *!*实例的不同:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#set( $foo = &quot;bar&quot; )</span><br><span class="line">$\!foo</span><br><span class="line">$\!&#123;foo&#125;</span><br><span class="line">$\\!foo</span><br><span class="line">$\\\!foo</span><br></pre></td></tr></table></figure>
+<p>输出结果为:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$!foo</span><br><span class="line">$!&#123;foo&#125;</span><br><span class="line">$\!foo</span><br><span class="line">$\\!foo</span><br></pre></td></tr></table></figure>
+<p>对比这个正规 <em>* 优先</em>$*的转义:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">\$foo</span><br><span class="line">\$!foo</span><br><span class="line">\$!&#123;foo&#125;</span><br><span class="line">\\$!&#123;foo&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果为:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$foo</span><br><span class="line">$!foo</span><br><span class="line">$!&#123;foo&#125;</span><br><span class="line">\bar</span><br></pre></td></tr></table></figure>
+<h3 id="杂记"><a class="header-anchor" href="#杂记">¶</a>杂记</h3>
+<p>这一章节是关于Velocimacros一些小疑问.本章节以后还会经常改变 , 所以它很值得你关注.</p>
+<p>Note : 贯穿整个章节, ‘Velocimacro’ 将被简写成 ‘VM’.</p>
+<p>**我可以使用一个指令或者一个可以用的指令参数吗?**例如 : #center( #bold(“hello”) )</p>
+<p>No. 一个指令不是一个可用的指令参数, 出于实用的目的, 一个VM是一个指令.</p>
+<p><em>然而…</em>, 这里有很多事情你需要做. 一个容易的解决方案是利用编译器 ‘doublequote’ (“) 输出显示它的内容. 你可以想下面方式来做</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#set($stuff = &quot;#bold(&apos;hello&apos;)&quot; )</span><br><span class="line">#center( $stuff )</span><br></pre></td></tr></table></figure>
+<p>输出结果为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#center( &quot;#bold( &apos;hello&apos; )&quot; )</span><br></pre></td></tr></table></figure>
+<p>在这个实例中参数是在VM中计算的,而不是在调用时 . 简而言之, the argument to the VM的参数传递到VM中进行计算 . 它准许你这么操作:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#macro( inner $foo )</span><br><span class="line">  inner : $foo</span><br><span class="line">#end</span><br><span class="line">#macro( outer $foo )</span><br><span class="line">   #set($bar = &quot;outerlala&quot;)</span><br><span class="line">   outer : $foo</span><br><span class="line">#end</span><br><span class="line">#set($bar = &apos;calltimelala&apos;)</span><br><span class="line">#outer( &quot;#inner($bar)&quot; )</span><br></pre></td></tr></table></figure>
+<p>输出结果为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Outer : inner : outerlala</span><br></pre></td></tr></table></figure>
+<p>因为 “#inner($bar)” 的计算发生在 #outer()的内部, 所以 $bar 的值是在 #outer() 内部进行赋值的.</p>
+<p>这是一种有意的保护功能 – 参数通过名字传递到VMs, 所以你能够传递VMs像状态引用,例如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#macro( foo $color )</span><br><span class="line">  &lt;tr bgcolor=$color&gt;&lt;td&gt;Hi&lt;/td&gt;&lt;/tr&gt;</span><br><span class="line">  &lt;tr bgcolor=$color&gt;&lt;td&gt;There&lt;/td&gt;&lt;/tr&gt;</span><br><span class="line">#end</span><br><span class="line">#foo( $bar.rowColor() )</span><br></pre></td></tr></table></figure>
+<p>rowColor()被重复调用,而不是仅仅调用一次.为了避免这种情况, 在VM外面执行方法, 并把值传递给VM.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#set($color = $bar.rowColor())</span><br><span class="line">#foo( $color )</span><br></pre></td></tr></table></figure>
+<p><strong>我可以注册一个宏变量 #parse() 吗?</strong></p>
+<p><strong>可以在 Velocity 1.6 中实现</strong></p>
+<p>如果你使用之前的版本, 你的Velocimacros必须第一次使用之前就已经被定义 .它的意思是有的当你使用  #macro()之前都已经被定义了.</p>
+<p>这是很重要的如果你试图 #parse() 一个包含#macro() 指令模板. 因为 #parse() 在运行时才被调用,解析时 解析器决定是否在你的模板中 VM-looking 元素是一个 VM, #parse()-ing 设置 VM 声明并不向期望那样工作. 为了避开这一点, 可以使用 velocimacro.library来使Velocity启动时重新加载VMs.</p>
+<p><strong>什么是宏自动加载?</strong></p>
+<p>这个属性用在开发模式下,  而不是生成环境 :</p>
+<p>velocimacro.library.autoreload</p>
+<p>默认是false. 当设置为true时</p>
+<p><type>.resource.loader.cache = false</type></p>
+<p>（<type> 是你使用资源的名字, 例如 ‘file’) 然后Velocity将自动加载已经修改的Velocimacro依赖包文件当你配置该选项时, 所以你不比清空你的服务器(或者引用的)或者通过其他方式来是Velocimacros重载.</type></p>
+<p>这里是一个简单的配置文件设置.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">file.resource.loader.path = templates</span><br><span class="line">file.resource.loader.cache = false</span><br><span class="line">velocimacro.library.autoreload = true</span><br></pre></td></tr></table></figure>
+<p>在生产环境不能使用这种配置.</p>
+<h3 id="字符串的拼接"><a class="header-anchor" href="#字符串的拼接">¶</a>字符串的拼接</h3>
+<p>开发者经常会问一个很普通的问题,就是怎么去拼接两个字符串?是不是类似于Java里面的’+’<em>?.</em></p>
+<p>为了实现在VTL中两个字符串的拼接VTL, 你仅仅需要把它们放在一起. 你需要把他们放在一起当你需要的时候, 请看下面实例.</p>
+<p>在一个有规则的 ‘schmoo’ 模板 (当你添加一个有规则的内容时) :</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#set( $size = &quot;Big&quot; )</span><br><span class="line">#set( $name = &quot;Ben&quot; )</span><br><span class="line"></span><br><span class="line">The clock is $size$name.</span><br></pre></td></tr></table></figure>
+<p>输出结果为 ‘The clock is BigBen’. 这里有更多有趣的实例, 例如当你想拼接字符串并传递给一个方法时, 或者定义一个新的引用,你只需要这样做</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#set( $size = &quot;Big&quot; )</span><br><span class="line">#set( $name = &quot;Ben&quot; )</span><br><span class="line"></span><br><span class="line">#set($clock = &quot;$size$name&quot; )</span><br><span class="line"></span><br><span class="line">The clock is $clock.</span><br></pre></td></tr></table></figure>
+<p>它们的输出结果是一样的. 作为最后一个实例, 当你想在你的引用中添加一个 ‘static’字符串时 , 你需要使用正式的引用 :</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#set( $size = &quot;Big&quot; )</span><br><span class="line">#set( $name = &quot;Ben&quot; )</span><br><span class="line"></span><br><span class="line">#set($clock = &quot;$&#123;size&#125;Tall$name&quot; )</span><br><span class="line"></span><br><span class="line">The clock is $clock.</span><br></pre></td></tr></table></figure>
+<p>现在输出的是 ‘The clock is BigTallBen’。正式引用解析能够把 ‘$size’ 和’$sizeTall’ 通过 ‘{}’ 进行区分开.</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/velocity/" rel="tag"># velocity</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/11/MybatisSingleParamNoGetter/" rel="next" title="mybatis 单参数不加@Param 报没有getter">
+                <i class="fa fa-chevron-left"></i> mybatis 单参数不加@Param 报没有getter
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="wind">
+            
+              <p class="site-author-name" itemprop="name">wind</p>
+              <div class="site-description motion-element" itemprop="description">光怪陆离,生人勿进</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/zhangmrit" title="GitHub &rarr; https://github.com/zhangmrit" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="/zhangmrit@126.com" title="E-Mail &rarr; zhangmrit@126.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://weibo.com/p/1005052719131961/home?is_all=1" title="Weibo &rarr; http://weibo.com/p/1005052719131961/home?is_all=1" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#hello-velocity-world实例"><span class="nav-number">1.</span> <span class="nav-text">¶Hello Velocity World实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注释"><span class="nav-number">2.</span> <span class="nav-text">¶注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用"><span class="nav-number">3.</span> <span class="nav-text">¶引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#严格引用模式"><span class="nav-number">4.</span> <span class="nav-text">¶严格引用模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模式替换"><span class="nav-number">5.</span> <span class="nav-text">¶模式替换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指令"><span class="nav-number">6.</span> <span class="nav-text">¶指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#条件语句"><span class="nav-number">7.</span> <span class="nav-text">¶条件语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#循环"><span class="nav-number">8.</span> <span class="nav-text">¶循环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引入"><span class="nav-number">9.</span> <span class="nav-text">¶引入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解析"><span class="nav-number">10.</span> <span class="nav-text">¶解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#break"><span class="nav-number">11.</span> <span class="nav-text">¶Break</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stop指令"><span class="nav-number">12.</span> <span class="nav-text">¶Stop指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#evaluate指令"><span class="nav-number">13.</span> <span class="nav-text">¶Evaluate指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#define指令"><span class="nav-number">14.</span> <span class="nav-text">¶Define指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#宏调用"><span class="nav-number">15.</span> <span class="nav-text">¶宏调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取字面量"><span class="nav-number">16.</span> <span class="nav-text">¶获取字面量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#格式化问题"><span class="nav-number">17.</span> <span class="nav-text">¶格式化问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他的特性和杂记"><span class="nav-number">18.</span> <span class="nav-text">¶其他的特性和杂记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#math-算术操作"><span class="nav-number">18.1.</span> <span class="nav-text">¶Math(算术操作)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#范围操作符"><span class="nav-number">18.2.</span> <span class="nav-text">¶范围操作符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高级问题-转义和"><span class="nav-number">18.3.</span> <span class="nav-text">¶高级问题:转义和!</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#杂记"><span class="nav-number">18.4.</span> <span class="nav-text">¶杂记</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串的拼接"><span class="nav-number">18.5.</span> <span class="nav-text">¶字符串的拼接</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">  <a href="http://beian.miit.gov.cn" rel="noopener" target="_blank">浙ICP备18051491号 </a>&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">wind</span>
+
+  
+
+  
+</div>
+<!--
+
+
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.1.0</div>
+
+
+
+-->
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'q81zc2vRnjjePQjTy7bPFHbw-gzGzoHsz',
+    appKey: 'xermbKjLAT2xNszPP1qY7vMr',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn'
+  });
+</script>
+
+
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $('.leancloud_visitors');
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
+            
+              .done(function() {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.time + 1);
+              })
+            
+              .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+              })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1 }))
+                .done(function() {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function() {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log('LeanCloud Counter Error: ' + responseJSON.code + ' ' + responseJSON.error);
+        });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + 'q81zc2vRnjjePQjTy7bPFHbw-gzGzoHsz')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: 'https://' + api_server + '/1.1' + url,
+              headers: {
+                'X-LC-Id': 'q81zc2vRnjjePQjTy7bPFHbw-gzGzoHsz',
+                'X-LC-Key': 'xermbKjLAT2xNszPP1qY7vMr',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+          
+            addCount(Counter);
+          
+        });
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+	<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>
