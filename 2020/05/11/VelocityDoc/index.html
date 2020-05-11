@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="Alive">
 <meta property="og:description" content="velocity模板好像没有什么比较好的文档，搜到一个，但是排版有点乱，所以美化和部分翻译以后分享给大家">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-05-11T08:36:17.017Z">
+<meta property="og:updated_time" content="2020-05-11T08:53:19.516Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Velocity模板语言(VTL) 入门指南">
 <meta name="twitter:description" content="velocity模板好像没有什么比较好的文档，搜到一个，但是排版有点乱，所以美化和部分翻译以后分享给大家">
@@ -446,7 +446,7 @@
                 
               
 
-              <time title="创建时间：2020-05-11 16:20:01 / 修改时间：16:36:17" itemprop="dateCreated datePublished" datetime="2020-05-11T16:20:01+08:00">2020-05-11</time>
+              <time title="创建时间：2020-05-11 16:20:01 / 修改时间：16:53:19" itemprop="dateCreated datePublished" datetime="2020-05-11T16:20:01+08:00">2020-05-11</time>
             
 
             
@@ -538,7 +538,6 @@
 <p>在上面的实例中, 变量是 <em>$a</em> ,它的值是*Velocity。*这个变量像其它的引用一样, 通过 <em>$</em> 字符开始。字符串的值放在引号中,单引号或双引号都可以。单引号保证引号里面的值分配给变量。双引号准许你使用velocity的引用和指令,例如  “Hello $name”,  <em>$name</em> 将被定义的变量值=右边的内容所替换</p>
 <p>下面的规则能使你更好的了解Velocity的工作原理：引用是通过*$* 开始的，用来获取值。指令*#* 用来定义值。</p>
 <p>在上面实例中, <em>#set</em> 被用来给变量分配一个值。这个变量是 <em>$a</em>, 能够在模板中使用并输出 “Velocity”。</p>
-<p>原文地址 <a href="https://blog.csdn.net/weixin_34056162/article/details/90686571" target="_blank" rel="noopener">https://blog.csdn.net/weixin_34056162/article/details/90686571</a></p>
 <h2 id="hello-velocity-world实例"><a class="header-anchor" href="#hello-velocity-world实例">¶</a>Hello Velocity World实例</h2>
 <p>当一个值分配给一个变量时, 你能够引用这个变量在你的HTML 文档中.在下面的实例中, 先对 <em>$foo</em> 进行赋值，然后引用它.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">#set( $foo = &quot;Velocity&quot; )</span><br><span class="line">Hello $foo World!</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;html&gt;</span><br></pre></td></tr></table></figure>
