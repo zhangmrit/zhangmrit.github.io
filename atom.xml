@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Alive</title>
+  
+  <subtitle>那些微而足道的一点事</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://zhangmrit.github.io/"/>
+  <updated>2023-04-18T03:42:49.189Z</updated>
+  <id>http://zhangmrit.github.io/</id>
+  
+  <author>
+    <name>wind</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Velocity模板语言(VTL) 入门指南</title>
+    <link href="http://zhangmrit.github.io/2020/05/11/VelocityDoc/"/>
+    <id>http://zhangmrit.github.io/2020/05/11/VelocityDoc/</id>
+    <published>2020-05-11T08:20:01.000Z</published>
+    <updated>2023-04-18T03:42:49.189Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;velocity模板好像没有什么比较好的文档，搜到一个，但是排版有点乱，所以美化和部分翻译以后分享给大家&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="工具" scheme="http://zhangmrit.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="velocity" scheme="http://zhangmrit.github.io/tags/velocity/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>mybatis 单参数不加@Param 报没有getter</title>
+    <link href="http://zhangmrit.github.io/2020/03/11/MybatisSingleParamNoGetter/"/>
+    <id>http://zhangmrit.github.io/2020/03/11/MybatisSingleParamNoGetter/</id>
+    <published>2020-03-11T05:47:16.000Z</published>
+    <updated>2023-04-18T03:42:49.188Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;code&gt;There is no getter for property named &#39;*&#39; in &#39;class java.lang.String&#39;&lt;/code&gt;，此错误之所以出现，是因为mybatis在对&lt;code&gt;parameterType=&amp;quot;String&amp;quot;&lt;/code&gt;的sql语句做了限制，假如你使用&lt;code&gt;&amp;lt;if test=&amp;quot;username != null&amp;quot;&amp;gt;&lt;/code&gt;或&lt;code&gt;&amp;lt;when test=&amp;quot;username != null&amp;quot;&amp;gt;&lt;/code&gt;这样的条件判断时，就会出现该错误，不过今天我们来刨根问底一下。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="mybatis" scheme="http://zhangmrit.github.io/categories/mybatis/"/>
+    
+    
+      <category term="mybatis" scheme="http://zhangmrit.github.io/tags/mybatis/"/>
+    
+      <category term="mapper" scheme="http://zhangmrit.github.io/tags/mapper/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>springboot部署https</title>
+    <link href="http://zhangmrit.github.io/2019/08/29/SpringbootUseHttps/"/>
+    <id>http://zhangmrit.github.io/2019/08/29/SpringbootUseHttps/</id>
+    <published>2019-08-29T02:18:57.000Z</published>
+    <updated>2023-04-18T03:42:49.188Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;很多场景都要求使用&lt;code&gt;https&lt;/code&gt;了，但是一般开发都是&lt;code&gt;http&lt;/code&gt;环境，改造&lt;code&gt;https&lt;/code&gt;有很多方法，这里介绍一种最好用的也是实际生产最多见的一种方式。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="spring" scheme="http://zhangmrit.github.io/categories/spring/"/>
+    
+    
+      <category term="nginx" scheme="http://zhangmrit.github.io/tags/nginx/"/>
+    
+      <category term="https" scheme="http://zhangmrit.github.io/tags/https/"/>
+    
+      <category term="springboot" scheme="http://zhangmrit.github.io/tags/springboot/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>centos7安装fastdfs并整合nginx</title>
+    <link href="http://zhangmrit.github.io/2019/08/01/centos7fdfsnginx/"/>
+    <id>http://zhangmrit.github.io/2019/08/01/centos7fdfsnginx/</id>
+    <published>2019-08-01T04:12:36.000Z</published>
+    <updated>2023-04-18T03:42:49.189Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;准备搞个IM,用FastDFS来存储聊天文件，随便找个教程就开撸，结果悲剧了😂😂😂😂 ,深入了解后，虽然复杂，但并不难，下面帮大家踩坑。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="工具" scheme="http://zhangmrit.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="nginx" scheme="http://zhangmrit.github.io/tags/nginx/"/>
+    
+      <category term="FastDFS" scheme="http://zhangmrit.github.io/tags/FastDFS/"/>
+    
+      <category term="centos7" scheme="http://zhangmrit.github.io/tags/centos7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Sonar快速入门</title>
+    <link href="http://zhangmrit.github.io/2019/04/10/LearnSonarFast/"/>
+    <id>http://zhangmrit.github.io/2019/04/10/LearnSonarFast/</id>
+    <published>2019-04-10T03:04:13.000Z</published>
+    <updated>2023-04-18T03:42:49.188Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;SonarQube 是一个用于管理源代码质量开放平台，它可以从多个维度检测代码质量，可以快速的定位代码中潜在的或者明显的 Bug、错误。它支持包括 Java、Python、Php、C/C++、C#、HTML、JavaScript、PL/SQL、Objective C 等二十多种编程语言的代码质量管理与检测。可作为我们日常开发中检测代码质量的重要工具。很多同学还不会使用，本文将从零开始，带你半小时上手，轻松搞定繁琐的配置。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="工具" scheme="http://zhangmrit.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="Sonar" scheme="http://zhangmrit.github.io/tags/Sonar/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用Jenkins持续集成</title>
+    <link href="http://zhangmrit.github.io/2019/04/02/JenkinsContinuous/"/>
+    <id>http://zhangmrit.github.io/2019/04/02/JenkinsContinuous/</id>
+    <published>2019-04-02T14:04:13.000Z</published>
+    <updated>2023-04-18T03:42:49.188Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Jenkins是一个非常好用的工具，我们可以用它来帮我们做很多事，如：自动构建、发布测试、持续集成、邮件通知等等很多很多，真是开发者的一个得力帮手。很多同学还不会使用，本文将从零开始，带你半小时上手，轻松搞定繁琐的配置。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="工具" scheme="http://zhangmrit.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="Jenkins" scheme="http://zhangmrit.github.io/tags/Jenkins/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>程序员怎样升职</title>
+    <link href="http://zhangmrit.github.io/2017/08/24/HowToPromote/"/>
+    <id>http://zhangmrit.github.io/2017/08/24/HowToPromote/</id>
+    <published>2017-08-24T05:12:03.000Z</published>
+    <updated>2023-04-18T03:42:49.188Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在知乎上看到一个过2k赞的回答，觉得讲的非常好，和我的经历也很像，特此分享给大家。&lt;a href=&quot;https://www.zhihu.com/question/20259295/answer/125138094&quot;&gt;直达原文&lt;/a&gt;&lt;br&gt;
+&lt;strong&gt;内容如下（部分排版和错误修改）&lt;/strong&gt;：&lt;br&gt;
+我是码农出身，工作十年，从初级程序猿（半年）- 项目主力（一年）- 初级技术管理（一年） - 中级技术管理（两年）- 部门管理（两年）- 高层管理（三年）- 职业经理人，一条路走过来，关于升职，有一些自己的心得可以分享。以下大致说说从技术到管理的转变，暂不涉及管理的进阶。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="涂鸦" scheme="http://zhangmrit.github.io/categories/%E6%B6%82%E9%B8%A6/"/>
+    
+    
+      <category term="personal" scheme="http://zhangmrit.github.io/tags/personal/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>从数据库读取网站配置</title>
+    <link href="http://zhangmrit.github.io/2017/05/09/ReadSiteConfigurationFromDatabase/"/>
+    <id>http://zhangmrit.github.io/2017/05/09/ReadSiteConfigurationFromDatabase/</id>
+    <published>2017-05-09T07:04:13.000Z</published>
+    <updated>2023-04-18T03:42:49.188Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;近期遇到一个算是比较少见的需求，有点搞脑子，如果你也有类似的疑问，那么可以看看这篇文章。需求如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;要经常改变网站的一些配置&lt;/li&gt;
+&lt;li&gt;这些配置除了显示也没什么用&lt;/li&gt;
+&lt;li&gt;通常可能会在全局使用&lt;/li&gt;
+&lt;li&gt;或许是一些分布式的配置&lt;/li&gt;
+&lt;li&gt;需要将配置存放在数据库&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;如果你的问题满足上述所述需求全部或者部分，不防阅读一下以下解决策略&lt;/strong&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="spring" scheme="http://zhangmrit.github.io/categories/spring/"/>
+    
+    
+      <category term="JAVA" scheme="http://zhangmrit.github.io/tags/JAVA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>你真的会写代码吗？</title>
+    <link href="http://zhangmrit.github.io/2017/02/13/DoYouReallyWriteCode/"/>
+    <id>http://zhangmrit.github.io/2017/02/13/DoYouReallyWriteCode/</id>
+    <published>2017-02-13T05:06:45.000Z</published>
+    <updated>2023-04-18T03:42:49.188Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;《编写可读代码的艺术》这本书我想程序猿都很熟悉吧。平时不怎么读书的我也是心血来潮将这本书通读了一遍，果然是大师写的书啊，让我感受颇深！&lt;br&gt;
+下面是我从这本“神书”中摘抄的一些精华，千万不要错过：&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="涂鸦" scheme="http://zhangmrit.github.io/categories/%E6%B6%82%E9%B8%A6/"/>
+    
+    
+      <category term="代码" scheme="http://zhangmrit.github.io/tags/%E4%BB%A3%E7%A0%81/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2016新版支付宝APP支付的坑</title>
+    <link href="http://zhangmrit.github.io/2016/10/11/2016NewAlipayPaymentBug/"/>
+    <id>http://zhangmrit.github.io/2016/10/11/2016NewAlipayPaymentBug/</id>
+    <published>2016-10-11T07:48:10.000Z</published>
+    <updated>2023-04-18T03:42:49.188Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;半年前做了支付宝APP支付的接口的封装，没想到，才几个月，支付宝对接口整体做了一次更新，然而还是用老套路去开发的我，一路蒙逼，最后只好重新看了一遍文档，下面列举一下新旧版本或者本身就存在的坑。希望大家引以为戒！&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="alipay" scheme="http://zhangmrit.github.io/categories/alipay/"/>
+    
+    
+      <category term="JAVA" scheme="http://zhangmrit.github.io/tags/JAVA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Spring自定义扫描注解</title>
+    <link href="http://zhangmrit.github.io/2016/08/23/SpringCustomScanAnnotation/"/>
+    <id>http://zhangmrit.github.io/2016/08/23/SpringCustomScanAnnotation/</id>
+    <published>2016-08-23T07:24:39.000Z</published>
+    <updated>2023-04-18T03:42:49.188Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近在做一个项目,首先是因为要在普通静态类里面调用Service,因为Service是Dubbo提供者的类,只能通过注解来调用.&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="spring" scheme="http://zhangmrit.github.io/categories/spring/"/>
+    
+    
+      <category term="JAVA" scheme="http://zhangmrit.github.io/tags/JAVA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>用markdown来写api</title>
+    <link href="http://zhangmrit.github.io/2016/06/15/UseMarkdownToWriteAPI/"/>
+    <id>http://zhangmrit.github.io/2016/06/15/UseMarkdownToWriteAPI/</id>
+    <published>2016-06-15T06:54:28.000Z</published>
+    <updated>2023-04-18T03:42:49.189Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一直在找寻最合适的方法来实现api接口文档的书写，直达发现了markdown,虽然也用markdown，却从来没想过可以这么优雅地来写api哈。那么开始get新技能吧。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="工具" scheme="http://zhangmrit.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="markdown" scheme="http://zhangmrit.github.io/tags/markdown/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2015年小谈</title>
+    <link href="http://zhangmrit.github.io/2016/02/05/2015YearTalk/"/>
+    <id>http://zhangmrit.github.io/2016/02/05/2015YearTalk/</id>
+    <published>2016-02-05T07:33:49.000Z</published>
+    <updated>2023-04-18T03:42:49.187Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;年关将近，到了该说说有些话的时候了。回首2015，经历的很多，得到的很多，成就的很少。下面，来数数那些坑爹的人和事：&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="涂鸦" scheme="http://zhangmrit.github.io/categories/%E6%B6%82%E9%B8%A6/"/>
+    
+    
+      <category term="personal" scheme="http://zhangmrit.github.io/tags/personal/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>程序员修炼之道</title>
+    <link href="http://zhangmrit.github.io/2016/02/04/ThePragmaticProgrammer/"/>
+    <id>http://zhangmrit.github.io/2016/02/04/ThePragmaticProgrammer/</id>
+    <published>2016-02-04T05:12:03.000Z</published>
+    <updated>2023-04-18T03:42:49.189Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;多码代码，多思考，少敲bug，少跟产品干架 看看月薪3万的程序员都避开了哪些坑：&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="涂鸦" scheme="http://zhangmrit.github.io/categories/%E6%B6%82%E9%B8%A6/"/>
+    
+    
+      <category term="personal" scheme="http://zhangmrit.github.io/tags/personal/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>SublimeLinter如何校验html、js、css</title>
+    <link href="http://zhangmrit.github.io/2016/02/01/SublimeLinterHowToUse/"/>
+    <id>http://zhangmrit.github.io/2016/02/01/SublimeLinterHowToUse/</id>
+    <published>2016-02-01T02:03:41.000Z</published>
+    <updated>2023-04-18T03:42:49.189Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;SublimeLinter是Sublime的一个代码检测工具插件。但是要正常使用它,还需要安装相应的插件。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="工具" scheme="http://zhangmrit.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="前端" scheme="http://zhangmrit.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>前端大杀器 Sublime 3安装和常用插件</title>
+    <link href="http://zhangmrit.github.io/2016/01/26/Sublime3InstallAndPlugin/"/>
+    <id>http://zhangmrit.github.io/2016/01/26/Sublime3InstallAndPlugin/</id>
+    <published>2016-01-26T12:19:14.000Z</published>
+    <updated>2023-04-18T03:42:49.188Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;SublimeText是一款非常精巧的文本编辑器，适合编写代码、做笔记、写文章。它用户界面十分整洁，功能非同凡响，性能快得出奇。这些非常棒的特性 包括任意跳转（Goto Anything）、多重选择（multiple selections）、指令面板（command palette）、免打扰模式（distraction free mode）、分区编辑（split editing）、快速项目切换（instant project switch），你还可以随意地自定义更多功能。还有，这款编辑器支持Mac、Windows和Linux平台。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="工具" scheme="http://zhangmrit.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="前端" scheme="http://zhangmrit.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+  </entry>
+  
+</feed>
